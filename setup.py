@@ -1,6 +1,6 @@
 from setuptools import setup
 from glob import glob
-exec(open('dkb_robo/version.py').read())
+exec(open('foo_bar_doo/version.py').read())
 setup(name='foo-bar-doo',
     version=__version__,
     description='foo-bar-doo',
