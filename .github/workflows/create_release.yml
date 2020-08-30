@@ -11,9 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: "[ PREPARE ] install twine"
-      run: |
-        sudo apt-get install -y curl twine python3
+      - name: "[ PREPARE ] install twine"
+        run: |
+          sudo apt-get install -y curl twine python3
 
       - name: "[ PREPARE ] Get current version"
         uses: oprypin/find-latest-tag@v1
