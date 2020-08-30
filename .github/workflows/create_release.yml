@@ -47,7 +47,7 @@ jobs:
       #    draft: false
       #    prerelease: false
 
-      name: "[ BUILD ] create pypi package"
+      - name: "[ BUILD ] create pypi package"
         id: create_package
         run: |
           python3 setup.py sdist
