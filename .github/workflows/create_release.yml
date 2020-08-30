@@ -51,3 +51,9 @@ jobs:
         id: create_package
         run: |
           python3 setup.py sdist
+
+      - name: "[ UPLOAD ] Publish package"
+        uses: pypa/gh-action-pypi-publish@master
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_TOKEN }}
