@@ -33,27 +33,29 @@ jobs:
       - run: echo "Repo is at version ${{ steps.dbv_robo_ver.outputs.tag }}"
       - run: echo "Latest tag is ${{ env.TAG_NAME }}"
 
-      #- name: "[ BUILD ] Create Release"
-      #  id: create_release
-      #  if: steps.dbv_robo_ver.outputs.tag != env.TAG_NAME
-      #  uses: actions/create-release@v1
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
-      #  with:
-      #    tag_name: ${{ env.TAG_NAME }}
-      #    release_name: ${{ env.APP_NAME }} ${{ env.TAG_NAME }}
-      #    body: |
-      #      [Changelog](CHANGES.md)
-      #    draft: false
-      #    prerelease: false
+      - name: "[ BUILD ] Create Release"
+        id: create_release
+        if: steps.dbv_robo_ver.outputs.tag != env.TAG_NAME
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ env.APP_NAME }} ${{ env.TAG_NAME }}
+          body: |
+            [Changelog](CHANGES.md)
+          draft: false
+          prerelease: false
 
       - name: "[ BUILD ] create pypi package"
         id: create_package
+        if: steps.dbv_robo_ver.outputs.tag != env.TAG_NAME
         run: |
           python3 setup.py sdist
 
       - name: "[ UPLOAD ] Publish package"
         uses: pypa/gh-action-pypi-publish@master
+        if: steps.dbv_robo_ver.outputs.tag != env.TAG_NAME        
         with:
           user: __token__
           password: ${{ secrets.PYPI_TOKEN }}
