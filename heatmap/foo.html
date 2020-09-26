@@ -5,7 +5,7 @@
   <title>Minimal Configuration Example</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/commons.css" />
-  <link rel="stylesheet" href="css/prism.css" />
+  <!-- <link rel="stylesheet" href="css/prism.css" /> -->
 </head>
 
 <body>
@@ -23,36 +23,26 @@
 
   <script type="text/javascript" src="shots.json"></script>
   <script src="js/heatmap.min.js"></script>
+  <!--  <script src="js/heatmap.js"></script>  -->
   <script>
     window.onload = function() {
 
       var heatmapInstance = h337.create({
         // only container is required, the rest will be defaults
-        container: document.querySelector('.heatmap')
+        container: document.querySelector('.heatmap'),
+
+        // gradient: { 0.25: "rgb(0,0,255)", 0.55: "rgb(0,255,0)", 0.85: "yellow", 1.0: "rgb(255,0,0)"},
+
+
       });
 
-      // now generate some random data
-      var points = [];
-      var max = 0;
-      var width = 590;
-      var height = 590;
-      var len = 200;
-
-      while (len--) {
-        var val = Math.floor(Math.random()*100);
-        max = Math.max(max, val);
-        var point = {
-          x: Math.floor(Math.random()*width),
-          y: Math.floor(Math.random()*height),
-          value: val
-        };
-        points.push(point);
-      }
-
       var mypoints = JSON.parse(shots)
+
+      // alert(jmax)
       // heatmap data format
+
       var data = {
-        max: 29,
+        max: jmax,
         data: mypoints
       };
       // if you have a set of datapoints always use setData instead of addData
