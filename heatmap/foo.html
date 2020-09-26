@@ -21,6 +21,7 @@
     </div>
   </div>
 
+  <script type="text/javascript" src="shots.json"></script>
   <script src="js/heatmap.min.js"></script>
   <script>
     window.onload = function() {
@@ -34,7 +35,7 @@
       var points = [];
       var max = 0;
       var width = 590;
-      var height = 595;
+      var height = 590;
       var len = 200;
 
       while (len--) {
@@ -47,10 +48,12 @@
         };
         points.push(point);
       }
+
+      var mypoints = JSON.parse(shots)
       // heatmap data format
       var data = {
-        max: max,
-        data: points
+        max: 29,
+        data: mypoints
       };
       // if you have a set of datapoints always use setData instead of addData
       // for data initialization
