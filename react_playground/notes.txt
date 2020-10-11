@@ -1,0 +1,2 @@
+# chapter-4: Webpack installation on win10
+npm install webpack@4 webpack-cli@3 webpack-dev-server@3 --save-dev

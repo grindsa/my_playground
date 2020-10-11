@@ -1,5 +1,5 @@
 # foo-ba-doo
 
-My test repo for workflow testing.
+My personal technology playground...
 
 Please move on there is nothing to see here...
