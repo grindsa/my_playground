@@ -12,6 +12,7 @@ jobs:
   #  runs-on: ubuntu-latest
   #  steps:
   #  - uses: actions/checkout@v2
+  #
   #  - name: Docker Hub Description
   #    uses: peter-evans/dockerhub-description@v2
   #    env:
@@ -40,5 +41,5 @@ jobs:
           echo TAG_NAME=$(cat acme/version.py | grep -i __version__ | head -n 1 | sed 's/__version__ = //g' | sed s/\'//g) >> $GITHUB_ENV
 
       - run: echo "Repo is at version ${{ steps.acme2certifier_ver.outputs.tag }}"
-      - run: echo "APP tag is ${{ env.APP_NAME }}"      
+      - run: echo "APP tag is ${{ env.APP_NAME }}"
       - run: echo "Latest tag is ${{ env.TAG_NAME }}"
