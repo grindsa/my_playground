@@ -1,0 +1,43 @@
+name: Push images to dockerhub and ghcr.io
+on:
+  push:
+    branches:
+      - "master"
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 4 * * 6'
+jobs:
+
+  #update_docker_hub_description:
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - uses: actions/checkout@v2
+  #  - name: Docker Hub Description
+  #    uses: peter-evans/dockerhub-description@v2
+  #    env:
+  #      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USER }}
+  #      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+  #      DOCKERHUB_REPOSITORY: grindsa/acme2certifier
+
+
+  build_and_upload_images_to_hub:
+    name: Push images to dockerhub and github
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Get current version"
+        uses: oprypin/find-latest-tag@v1
+        with:
+          repository: ${{ github.repository }}  # The repository to scan.
+          releases-only: true  # We know that all relevant tags have a GitHub release for them.
+        id: acme2certifier_ver  # The step ID to refer to later.
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: "Retrieve Version from version.py"
+        run: |
+          echo APP_NAME=$(echo ${{ github.repository }} | awk -F / '{print $2}') >> $GITHUB_ENV
+          echo TAG_NAME=$(cat acme/version.py | grep -i __version__ | head -n 1 | sed 's/__version__ = //g' | sed s/\'//g) >> $GITHUB_ENV
+
+      - run: echo "Repo is at version ${{ steps.acme2certifier_ver.outputs.tag }}"
+      - run: echo "Latest tag is ${{ env.TAG_NAME }}"
