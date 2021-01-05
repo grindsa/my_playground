@@ -1,4 +1,4 @@
-import React. {useState, }from 'react';
+import React, {useState }from 'react';
 import { IngredientFormpart } from './ingredientformpart';
 
 import './recipeform.css';
@@ -16,102 +16,82 @@ const emptyRecipe = {
   ]
 }
 
-export class RecipeForm extends React.Component {
-  constructor(props){
-    super(props);
-    /* this.state = emptyRecipe; */
-    if (props.recipe){
-      this.state = {
-        name: props.recipe.name,
-        ingredients: [
-          ... props.recipe.ingredients
-      ]};
-    }else {
-      this.state = emptyRecipe;
-    }
+export const RecipeForm = ({recipe = emptyRecipe, onSave}) => {
 
+  const [recipeName, setRecipeName] = useState(recipe.name);
+  const [ingredients, setIngredients] = useState(recipe.ingredients);
+
+  const handleNameChange = (event) => {
+    setRecipeName(event.target.value);
   }
 
-  render() {
+  const handleAddIngredient = (event) => {
+    setIngredients(currentIngredients => ([
+      ... currentState.ingredients,
+      createEmptyIngredient()
+    ]))
+  }
 
-    const handleNameChange = (event) => {
-      this.setState({
-        name: event.target.value
-      });
-    }
-
-    const handleAddIngredient = (event) => {
-      this.setState(currentState => {
-        return {
-          ... currentState,
-          ingredients: [
-            ... currentState.ingredients,
-            createEmptyIngredient()
-          ]
-        }
-      })
-    }
-
-    const handleIngredientChange = (event, ingredientName) => {
-      const {value, name} = event.target;
-      this.setState(currentState => ({
-        ... currentState,
-        ingredients: currentState.ingredients.map(ingredient => {
-          if(ingredient.name === ingredientName) {
-            return {
-              ... ingredient,
-              [name]: value
-            }
+  const handleIngredientChange = (event, ingredientName) => {
+    const {value, name} = event.target;
+    setIngredients(currentIngredients => {
+      currentIngredients.map(ingredient => {
+        if(ingredient.name === ingredientName) {
+          return {
+            ... ingredient,
+            [name]: value
           }
-          return ingredient;
-        })
-      }))
-    }
-
-    const handleRecipeSave = () => {
-      const finishedIngredients = this.state.ingredients.map(ingredient => ({
-        ... ingredient,
-        amount: Number.parseFloat(ingredient.amount)
-      }));
-      this.props.onSave({
-        name: this.state.name,
-        ingredients: finishedIngredients
-      });
-
-      this.setState(emptyRecipe)
-    }
-
-
-    const ingredientFormpart = this.state.ingredients.map((ingredient, index) =>{
-      return (
-        <IngredientFormpart
-        key={`ingredient-${index}`}
-        ingredient={ingredient}
-        onChange= {(event) => this.handleIngredientChange(event, ingredient.name)}
-        />
-      )
-    })
-    return (
-      <form>
-        <label>
-          Name des Rezepts:
-          <input
-            type='text'
-            value={ this.state.name }
-            onChange= { this.handleNameChange }
-           />
-        </label>
-        <label>
-          Zutaten:
-          {ingredientFormpart}
-        </label>
-        <article>
-          <button type="button" onClick={() => this.handleAddIngredient()}> Zutat hinzufügen </button>
-        </article>
-        <article>
-          <button type="button" onClick={() => this.handleRecipeSave()}> Speichern </button>
-        </article>
-      </form>
-    );
+        }
+        return ingredient;
+      })});
   }
+
+  const handleRecipeSave = () => {
+    const finishedIngredients = ingredients.map(ingredient => ({
+      ... ingredient,
+      amount: Number.parseFloat(ingredient.amount)
+    }));
+    onSave({
+      id: recipe.id,
+      name: recipeName,
+      ingredients: finishedIngredients
+    });
+
+    setRecipeName('')
+    setIngredients([])
+  }
+
+  console.log(ingredients)
+  const ingredientList = ingredients.map((ingredient, index) =>{
+    return (
+      <IngredientFormpart
+      key={`ingredient-${index}`}
+      ingredient={ingredient}
+      onChange= {(event) => handleIngredientChange(event, ingredient.name)}
+      />
+    )
+  })
+
+  return (
+    <form>
+      <label>
+        Name des Rezepts:
+        <input
+          type='text'
+          value={ recipeName }
+          onChange= { handleNameChange }
+         />
+      </label>
+      <label>
+        Zutaten:
+        {ingredientList}
+      </label>
+      <article>
+        <button type="button" onClick={() => handleAddIngredient()}> Zutat hinzufügen </button>
+      </article>
+      <article>
+        <button type="button" onClick={() => handleRecipeSave()}> Speichern </button>
+      </article>
+    </form>
+  );
 }
