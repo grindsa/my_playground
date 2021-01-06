@@ -6,10 +6,10 @@ import { Users } from "./components/Users.js";
 import { NoPageFound } from "./components/NoPageFound.js";
 
 const routes = {
-  "/": () => <Users />,
-  "/about": () => <About />,
-  "/contact": () => <Contact />,
-  "/users": () => <Users /> ,
+  '/': () => <Users />,
+  '/about': () => <About />,
+  '/contact': () => <Contact />,
+  '/users': () => <User />,
 };
 
 export const App = () => {

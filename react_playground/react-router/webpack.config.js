@@ -26,6 +26,7 @@ module.exports = {
       host: '0.0.0.0',
       port: 8083,
       disableHostCheck: true,
+      historyApiFallback: true
   },
   resolve: {
     extensions: [ '.js', '.jsx' ]
