@@ -1,0 +1,62 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { A, useRoutes } from "hookrouter";
+
+
+const Users = () => {
+  return (
+    <div>
+      <h1>Users</h1>
+      <A href="/about">About</A>
+    </div>
+  );
+};
+
+const About = () => {
+  return (
+    <div>
+      <h1>About</h1>
+      <A href="/users">Users</A>
+    </div>
+  );
+};
+
+const Home = () => {
+  return (
+    <div>
+      <h1>Home</h1>
+      <A href="/">Home</A>
+    </div>
+  );
+};
+
+
+const routes = {
+  "/": () => <Home />,
+  "/users": () => <Users />,
+  "/about": () => <About />
+};
+
+function App() {
+  const routeResult = useRoutes(routes);
+  return (
+    <div className="App">
+      <div>
+        <A href="/">Home Page</A>
+      </div>
+      <div>
+        <A href="/users">Users Page</A>
+      </div>
+      <div>
+        <A href="/about">About Page</A>
+      </div>
+      {routeResult}
+    </div>
+  );
+}
+
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+)

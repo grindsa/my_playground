@@ -19,8 +19,13 @@ module.exports = {
           'style-loader',
           'css-loader'
         ]
-      }        
+      }
     ]
+  },
+  devServer: {
+      host: '0.0.0.0',
+      port: 8083,
+      disableHostCheck: true,
   },
   resolve: {
     extensions: [ '.js', '.jsx' ]
