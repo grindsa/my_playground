@@ -9,7 +9,7 @@ const routes = {
   '/': () => <Users />,
   '/about': () => <About />,
   '/contact': () => <Contact />,
-  '/users': () => <User />,
+  '/users/:foo/:bar': ({foo, bar}) => <Users  foo={foo} bar={bar}/>,
 };
 
 export const App = () => {

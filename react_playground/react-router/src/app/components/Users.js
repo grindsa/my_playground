@@ -1,5 +1,6 @@
 import React from "react";
 
-export const Users = () => {
-  return <h1>Users</h1>;
+export const Users = (props) => {
+  console.log(props)
+  return <h1>Users1</h1>;
 }
