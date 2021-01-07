@@ -17,6 +17,9 @@ export const App = () => {
 
   return (
     <div className="App">
+      <A href="/users">Users Page</A><br />
+      <A href="/about">About Page</A><br />
+      <A href="/contact">Contacts Page</A>
       {routeResult}
     </div>
   );
