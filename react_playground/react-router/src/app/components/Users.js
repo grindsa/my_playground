@@ -2,7 +2,7 @@ import React from "react";
 import { useRoutes, A } from "hookrouter";
 
 export const Users = (props) => {
-
+  console.log('foofoo')
   return(
     <main>
       <h1>Users1</h1>

@@ -9,6 +9,7 @@ const routes = {
   '/': () => <Users />,
   '/about': () => <About />,
   '/contact': () => <Contact />,
+  '/users': () => <Users />,  
   '/users/:foo/:bar': ({foo, bar}) => <Users  foo={foo} bar={bar}/>,
 };
 
