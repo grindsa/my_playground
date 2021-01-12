@@ -12,7 +12,7 @@ if __name__ == '__main__':
     cnt = 0
 
     # cluster size
-    clul = 20
+    clul = 10
 
     for line in fso:
         cnt += 1
@@ -20,8 +20,11 @@ if __name__ == '__main__':
 
         # splint line in x and y
         (myx, myy) = line.split(';')
-        calc_x = float(myx)
-        calc_y = float(myy)
+        #calc_y = float(myx) * -1
+        # calc_x = float(myy)
+        calc_y = float(myx)
+        calc_x = float(myy)
+
 
         # x = -100, 100
         # y = 0, 105
