@@ -2,6 +2,22 @@
 from pprint import pprint
 import json
 
+
+def _shoot_coordinates_convert(logger, coordinate_x, coordinate_y):
+    """ convert  arbitrary coordinates to actual coordinates in meters sourse: leaffan.net """
+    try:
+        x2m = 0.3048
+        y2m = 0.1524
+        meter_x = x2m * int(coordinate_x)
+        meter_y = y2m * int(coordinate_y)
+    except BaseException as err_:
+        logger.critical('error in _shoot_coordinates_convert(): {0}'.format(err_))
+        meter_x = 0
+        meter_y = 0
+
+    return(round(meter_x, 2), round(meter_y, 2))
+
+
 if __name__ == '__main__':
 
     INFILE = 'heatmap/shots.txt'
@@ -20,7 +36,7 @@ if __name__ == '__main__':
 
         # splint line in x and y
         (myx, myy) = line.split(';')
-        #calc_y = float(myx) * -1
+        # calc_y = float(myx) * -1
         # calc_x = float(myy)
         calc_y = float(myx)
         calc_x = float(myy)
