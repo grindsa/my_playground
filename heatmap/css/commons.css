@@ -41,7 +41,10 @@ html, body, p, div { margin:0; padding:0; }
 }
 
 .heatmap {
-  background-image: url(../img/shotmap.svg);
-  width: 590px;
-  height: 595px;
+  background-image: url(../img/hockeyrink.png);
+  width: 770px;
+  height: 385px;
+  background-position: center center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: 100%; /* Resize the background image to cover the entire container */  
 }

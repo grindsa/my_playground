@@ -25,16 +25,21 @@ if __name__ == '__main__':
 
         fso = open('heatmap/shots.txt', "w")
         for shot in data['match']['shots']:
-            if shot['team_id'] == 3:
-                myx = shot['coordinate_x']
-                myy = shot['coordinate_y'] * -1
-                # print(shot['coordinate_x'], myx, shot['coordinate_y'], myy)             
-                fso.write('{0};{1}\n'.format(myx, myy))
- 
-            else:          
-                myy = shot['coordinate_y']
-                myx = shot['coordinate_x'] * -1                          
-                #print(shot['coordinate_x'], myx, shot['coordinate_y'], myy)             
-                #fso.write('{0};{1}\n'.format(myx, myy))
+            myx = shot['coordinate_x']
+            myy = shot['coordinate_y']
+            fso.write('{0};{1}\n'.format(myx, myy))                           
+            #if shot['team_id'] == 3:
+            #    myy = shot['coordinate_x']
+            #    myx = shot['coordinate_y']
+            #    # print(shot['coordinate_x'], myx, shot['coordinate_y'], myy)
+            #    # fso.write('{0};{1}\n'.format(myx, myy))
+
+            #else:
+            #    myy = shot['coordinate_x']
+            #    myx = shot['coordinate_y']
+            #    #myy = shot['coordinate_y']
+            #    #myx = shot['coordinate_x']
+            #    #print(shot['coordinate_x'], myx, shot['coordinate_y'], myy)
+            #    fso.write('{0};{1}\n'.format(myx, myy))
 
         fso.close

@@ -36,17 +36,15 @@ if __name__ == '__main__':
 
         # splint line in x and y
         (myx, myy) = line.split(';')
-        # calc_y = float(myx) * -1
-        # calc_x = float(myy)
-        calc_y = float(myx)
-        calc_x = float(myy)
+        calc_x = float(myx)
+        calc_y = float(myy)
 
 
         # x = -100, 100
         # y = 0, 105
         # calculate coordicates
-        calc_x = round((calc_x + 100) * 295/100)
-        calc_y = round((105 - calc_y) * 595/105)
+        calc_x = round((calc_x + 100) * 770/200)
+        calc_y = round((105 - calc_y) * 385/210)
 
         # round to clul
         calc_x = round((calc_x/clul)) * clul
