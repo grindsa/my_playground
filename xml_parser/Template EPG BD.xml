@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<polUni>
+	<fvTenant name="DC0" status="modified">
+		<fvBD arpFlood="yes" descr="" epMoveDetectMode="" ipLearning="yes" limitIpLearnToSubnets="yes" mcastAllow="no" multiDstPktAct="bd-flood" name="$BD_NAME" status="" type="regular" unicastRoute="yes" unkMacUcastAct="flood" unkMcastAct="flood">
+			<fvRsBDToNdP tnNdIfPolName=""/>
+			<fvRsCtx tnFvCtxName="$VRF_NAME"/>
+			<fvRsIgmpsn tnIgmpSnoopPolName=""/>
+			<fvRsBdToEpRet resolveAct="resolve" tnFvEpRetPolName=""/>
+			<fvSubnet ctrl="" descr="" ip="10.24.66.193/27" preferred="no" scope="public,shared" virtual="no">
+        	</fvSubnet>
+		</fvBD>
+		<fvAp name="$AP_DC0" status="modified">
+			<fvAEPg descr="" floodOnEncap="disabled" isAttrBasedEPg="no" matchT="AtleastOne" name="$EPG_MIG231" pcEnfPref="unenforced" prefGrMemb="include" prio="unspecified" status="">
+				<fvRsBd tnFvBDName="$BD_MIG231"/>
+			</fvAEPg>
+		</fvAp>
+	</fvTenant>
+</polUni>
+
