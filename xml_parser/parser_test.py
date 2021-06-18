@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 from lxml import etree
 
-
 if __name__ == '__main__':
 
     filename = 'Template EPG BD.xml'
