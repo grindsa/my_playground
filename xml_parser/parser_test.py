@@ -33,6 +33,11 @@ if __name__ == '__main__':
 
     group_by = ['TENANT', 'BD_NAME']
 
+    mapping_dic  = {
+        'TENANT': 'fvTenant',
+        'BD_NAME': 'fvBD'
+    }
+
     csv_list = csv.DictReader(open(csv_file, encoding='utf-8-sig'), delimiter=';')
     csv_dic = csv_group(DEBUG, csv_list, group_by)
 
