@@ -103,10 +103,6 @@ Remember to:
 %{__chmod} -R go-w %{buildroot}%{dest_dir}/%{projname}
 
 %{__cp} -a \
-    examples/acme_srv.cfg \
-    %{buildroot}%{dest_dir}/%{projname}/acme_srv/acme_srv.cfg
-
-%{__cp} -a \
     examples/db_handler/wsgi_handler.py \
     %{buildroot}%{dest_dir}/%{projname}/acme_srv/db_handler.py
 
