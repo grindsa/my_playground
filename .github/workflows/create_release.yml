@@ -98,6 +98,7 @@ jobs:
           dpkg-buildpackage -uc -us
           # dpkg -c ../acme2certifier_${{ env.TAG_NAME }}-1_all.deb
           cp ../acme2certifier_${{ env.TAG_NAME }}-1_all.deb "$(pwd)/acme2certifier_${{ env.TAG_NAME }}-1_all.deb"
+          ls -la
 
       - name: Upload Release deb
         id: upload-deb
