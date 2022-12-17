@@ -106,6 +106,6 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
             upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: $(pwd)/acme2certifier_${{ env.TAG_NAME }}-1_all.deb
+            asset_path: "$(pwd)/acme2certifier_${{ env.TAG_NAME }}-1_all.deb"
             asset_name: acme2certifier_${{ env.TAG_NAME }}-1_all.deb
             asset_content_type: ${{ steps.rpm_build.outputs.rpm_content_type }}
