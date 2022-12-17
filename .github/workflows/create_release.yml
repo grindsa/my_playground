@@ -88,6 +88,7 @@ jobs:
           sudo apt-get -y install build-essential fakeroot dpkg-dev devscripts debhelper
           rm setup.py
           cp -R examples/install_scripts/debian ./
+          sudo sed -i "s/__version__/${{ env.TAG_NAME }}/g" debian/changelog
           cd ../
           tar cvfz ../acme2certifier_${{ env.TAG_NAME }}.orig.tar.gz ./
 
