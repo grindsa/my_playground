@@ -13,6 +13,7 @@ jobs:
 
     - name: "Create images"
       run: |
+        exit 1
         cat examples/Docker/apache2/wsgi/Dockerfile | docker build -t grindsa/acme2certifier:apache2-wsgi -f - . --no-cache
 
     - name: "Dump images to local filesystem"
