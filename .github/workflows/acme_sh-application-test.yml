@@ -26,14 +26,14 @@ jobs:
       with:
         workflow: ${{ github.event.workflow_run.workflow_id }}
         github_token: ${{secrets.GITHUB_TOKEN}}
-        name: a2c-apache2-django.tar.gz
+        name: a2c-apache2-wsgi.tar.gz
         path: /tmp
 
     - name: Load Docker images into repository
       working-directory: /tmp
       run: |
-        gunzip a2c-apache2-django.tar.gz
-        docker load -i a2c-apache2-django.tar
+        gunzip a2c-apache2-wsgi.tar.gz
+        docker load -i a2c-apache2-wsgi.tar
         docker images
 
     - name: "Bring up container"
@@ -159,14 +159,14 @@ jobs:
       with:
         workflow: ${{ github.event.workflow_run.workflow_id }}
         github_token: ${{secrets.GITHUB_TOKEN}}
-        name: a2c-apache2-wsgi.tar.gz
+        name: a2c-apache2-django.tar.gz
         path: /tmp
 
     - name: Load Docker images into repository
       working-directory: /tmp
       run: |
-        gunzip a2c-apache2-wsgi.tar.gz
-        docker load -i a2c-apache2-wsgi.tar
+        gunzip a2c-apache2-django.tar.gz
+        docker load -i a2c-apache2-django.tar
         docker images
 
     - name: "Bring up container"
