@@ -1,11 +1,11 @@
 name: Application Tests - acme_sh
 
 # Only trigger, when the build workflow succeeded
-on:
-  workflow_run:
-    workflows: ["CI build"]
-    types:
-      - completed
+#on:
+#  workflow_run:
+#    workflows: ["CI build"]
+#    types:
+#      - completed
 
 jobs:
   acme_sh_apache2_wsgi:
