@@ -1,11 +1,11 @@
 name: Application Tests - acme_sh
 
 # Only trigger, when the build workflow succeeded
-on:
-  workflow_run:
-    workflows: ["CI build"]
-    types:
-      - completed
+#on:
+#  workflow_run:
+#    workflows: ["CI build"]
+#    types:
+#      - completed
 
 jobs:
   acme_sh_apache2_wsgi:
@@ -42,7 +42,6 @@ jobs:
     - name: "Bring up container"
       working-directory: examples/Docker/
       run: |
-        exit 1
         sudo mkdir -p data
         docker network create acme
         docker-compose up -d
