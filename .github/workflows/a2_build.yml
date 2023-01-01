@@ -20,7 +20,6 @@ jobs:
         echo TAG_NAME=$(cat acme_srv/version.py | grep -i __version__ | head -n 1 | sed 's/__version__ = //g' | sed s/\'//g) >> $GITHUB_ENV
 
     - run: echo "Repo is at version ${{ steps.acme2certifier_ver.outputs.tag }}"
-    - run: echo "Latest tag is ${{ env.TAG_NAME }}"
 
     - run: echo "Rund build workflow for commit ${{ github.sha }}"
 
