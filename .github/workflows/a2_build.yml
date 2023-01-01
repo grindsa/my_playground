@@ -129,6 +129,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: "Retrieve Version from version.py"
+      run: |
+        echo TAG_NAME=$(cat acme_srv/version.py | grep -i __version__ | head -n 1 | sed 's/__version__ = //g' | sed s/\'//g) >> $GITHUB_ENV
+
+    - run: echo "Repo is at version ${{ steps.acme2certifier_ver.outputs.tag }}"
+    - run: echo "Latest tag is ${{ env.TAG_NAME }}"
+
     - name: update version number in spec file
       run: |
         sudo sed -i "s/__version__/${{ env.TAG_NAME }}/g" examples/install_scripts/rpm/acme2certifier.spec
@@ -154,6 +161,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
+    - name: "Retrieve Version from version.py"
+      run: |
+        echo TAG_NAME=$(cat acme_srv/version.py | grep -i __version__ | head -n 1 | sed 's/__version__ = //g' | sed s/\'//g) >> $GITHUB_ENV
+
+    - run: echo "Repo is at version ${{ steps.acme2certifier_ver.outputs.tag }}"
+    - run: echo "Latest tag is ${{ env.TAG_NAME }}"
 
     - name: Prepare deb packaging environment
       run: |
