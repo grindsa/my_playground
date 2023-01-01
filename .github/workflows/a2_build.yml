@@ -92,3 +92,33 @@ jobs:
       with:
         name: a2c-nginx-wsgi.tar.gz
         path: /tmp/a2c-artificats/a2c-nginx-wsgi.tar.gz
+
+  build_nginx_django:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: "Retrieve Version from version.py"
+      run: |
+        echo TAG_NAME=$(cat acme_srv/version.py | grep -i __version__ | head -n 1 | sed 's/__version__ = //g' | sed s/\'//g) >> $GITHUB_ENV
+
+    - run: echo "Repo is at version ${{ steps.acme2certifier_ver.outputs.tag }}"
+    - run: echo "Latest tag is ${{ env.TAG_NAME }}"
+
+    - run: echo "Rund build workflow for commit ${{ github.sha }}"
+
+    - name: "Create image"
+      run: |
+          cat examples/Docker/nginx/django/Dockerfile | docker build -t acme2certifier/django -t grindsa/acme2certifier:nginx-django -t grindsa/acme2certifier:${{ env.TAG_NAME }}-nginx-django -t ghcr.io/grindsa/acme2certifier:nginx-django -t ghcr.io/grindsa/acme2certifier:${{ env.TAG_NAME }}-nginx-django -f - .  --no-cache
+
+    - name: "Dump image to local filesystem"
+      run: |
+          mkdir -p /tmp/a2c-artificats
+          docker save acme2certifier/django:latest -o /tmp/a2c-artificats/a2c-nginx-django.tar
+          gzip /tmp/a2c-artificats/a2c-nginx-django.tar
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: a2c-nginx-django.tar.gz
+        path: /tmp/a2c-artificats/a2c-nginx-django.tar.gz

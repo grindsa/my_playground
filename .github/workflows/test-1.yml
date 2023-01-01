@@ -22,7 +22,7 @@ jobs:
       with:
         workflow: ${{ github.event.workflow_run.workflow_id }}
         github_token: ${{secrets.GITHUB_TOKEN}}
-        name: a2c-wsgi.tar.gz
+        name: a2c-apache2-wsgi.tar.gz
         path: /tmp
 
     - name: Load Docker images into repository
