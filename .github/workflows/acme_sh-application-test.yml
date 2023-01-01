@@ -7,6 +7,12 @@ name: Application Tests - acme_sh
 #    types:
 #      - completed
 
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 2 * * 6'
+
+
 jobs:
   acme_sh_apache2_wsgi:
     name: "acme_sh_apache2_wsgi"

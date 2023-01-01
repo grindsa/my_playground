@@ -201,8 +201,8 @@ jobs:
     steps:
     - name: juppwupp 1
       run: |
-        echo foo
-^
+        echo "foo"
+
   sub_workflow2:
     needs: [build_apache2_wsgi, build_apache2_django, build_nginx_wsgi, build_nginx_django, build_rpm, build_deb]
     runs-on: ubuntu-latest

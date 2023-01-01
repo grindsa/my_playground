@@ -1,11 +1,16 @@
 name: CI Test
 
-# Only trigger, when the build workflow succeeded
 on:
-  workflow_run:
-    workflows: ["CI build"]
-    types:
-      - completed
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 2 * * 6'
+
+# Only trigger, when the build workflow succeeded
+#on:
+#  workflow_run:
+#    workflows: ["CI build"]
+#    types:
+#     - completed
 
 jobs:
   test:
