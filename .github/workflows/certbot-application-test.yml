@@ -5,8 +5,14 @@ on:
 
 jobs:
 
+  group_test:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo group tests
+
   certbot_apache2_wsgi:
     name: "certbot_apache2_wsgi"
+    needs: [group_test]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -116,6 +122,7 @@ jobs:
 
   certbot_apache2_django:
     name: "certbot_apache2_django"
+    needs: [group_test]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -227,6 +234,7 @@ jobs:
 
   certbot_nginx_wsgi:
     name: "certbot_nginx_wsgi"
+    needs: [group_test]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -329,6 +337,7 @@ jobs:
 
   certbot_nginx_django:
     name: "certbot_nginx_django"
+    needs: [group_test]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
