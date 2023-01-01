@@ -19,6 +19,9 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -153,6 +156,9 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -291,6 +297,9 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -428,6 +437,9 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
