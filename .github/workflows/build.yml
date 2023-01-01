@@ -15,3 +15,5 @@ jobs:
       uses: juliangruber/sleep-action@v1
       with:
         time: 10s
+
+    - run: echo "Rund build workflow ended"
