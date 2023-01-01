@@ -244,6 +244,15 @@ jobs:
     - name: "checkout GIT"
       uses: actions/checkout@v3
 
+    - name: Download artifact
+      id: download-artifact
+      uses: dawidd6/action-download-artifact@v2
+      with:
+        workflow: ${{ github.event.workflow_run.workflow_id }}
+        github_token: ${{secrets.GITHUB_TOKEN}}
+        name: a2c-nginx-wsgi.tar.gz
+        path: /tmp
+
     - name: Load Docker images into repository
       working-directory: /tmp
       run: |
