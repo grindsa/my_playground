@@ -25,13 +25,13 @@ jobs:
     - name: "Dump image to local filesystem"
       run: |
           mkdir -p /tmp/a2c-artificats
-          docker save acme2certifier/wsgi:latest -o /tmp/a2c-artificats/a2c-wsgi.tar
-          gzip /tmp/a2c-artificats/a2c-wsgi.tar
+          docker save acme2certifier/wsgi:latest -o /tmp/a2c-artificats/a2c-apache2-wsgi.tar
+          gzip /tmp/a2c-artificats/a2c-apache2-wsgi.tar
 
     - uses: actions/upload-artifact@v3
       with:
-        name: a2c-wsgi.tar.gz
-        path: /tmp/a2c-artificats/a2c-wsgi.tar.gz
+        name: a2c-apache2-wsgi.tar.gz
+        path: /tmp/a2c-artificats/a2c-apache2-wsgi.tar.gz
 
   build_apache2_django:
     runs-on: ubuntu-latest
@@ -55,10 +55,40 @@ jobs:
     - name: "Dump image to local filesystem"
       run: |
           mkdir -p /tmp/a2c-artificats
-          docker save acme2certifier/django:latest -o /tmp/a2c-artificats/a2c-django.tar
-          gzip /tmp/a2c-artificats/a2c-django.tar
+          docker save acme2certifier/django:latest -o /tmp/a2c-artificats/a2c-apache2-django.tar
+          gzip /tmp/a2c-artificats/a2c-apache2-django.tar
 
     - uses: actions/upload-artifact@v3
       with:
-        name: a2c-django.tar.gz
-        path: /tmp/a2c-artificats/a2c-django.tar.gz
+        name: a2c-apache2-django.tar.gz
+        path: /tmp/a2c-artificats/a2c-apache2-django.tar.gz
+
+  build_nginx_wsgi:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: "Retrieve Version from version.py"
+      run: |
+        echo TAG_NAME=$(cat acme_srv/version.py | grep -i __version__ | head -n 1 | sed 's/__version__ = //g' | sed s/\'//g) >> $GITHUB_ENV
+
+    - run: echo "Repo is at version ${{ steps.acme2certifier_ver.outputs.tag }}"
+    - run: echo "Latest tag is ${{ env.TAG_NAME }}"
+
+    - run: echo "Rund build workflow for commit ${{ github.sha }}"
+
+    - name: "Create image"
+      run: |
+           cat examples/Docker/nginx/wsgi/Dockerfile | docker build -t nginx/wsgi -t grindsa/acme2certifier:nginx-wsgi -t grindsa/acme2certifier:${{ env.TAG_NAME }}-nginx-wsgi -t ghcr.io/grindsa/acme2certifier:nginx-wsgi -t ghcr.io/grindsa/acme2certifier:${{ env.TAG_NAME }}-nginx-wsgi -f - . --no-cache
+
+    - name: "Dump image to local filesystem"
+      run: |
+          mkdir -p /tmp/a2c-artificats
+          docker save acme2certifier/nginx:latest -o /tmp/a2c-artificats/a2c-nginx-wsgi.tar
+          gzip /tmp/a2c-artificats/a2c-nginx-wsgi.tar
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: a2c-nginx-wsgi.tar.gz
+        path: /tmp/a2c-artificats/a2c-nginx-wsgi.tar.gz
