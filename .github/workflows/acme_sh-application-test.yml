@@ -19,6 +19,9 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -39,6 +42,7 @@ jobs:
     - name: "Bring up container"
       working-directory: examples/Docker/
       run: |
+        exit 1
         sudo mkdir -p data
         docker network create acme
         docker-compose up -d
@@ -152,6 +156,9 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -290,6 +297,9 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -427,6 +437,9 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.workflow_run.head_branch }}
+    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
