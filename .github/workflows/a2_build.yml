@@ -1,6 +1,7 @@
 name: CI build
 
-on: [push]
+on:
+  push:
   pull_request:
     branches: [ devel ]
   schedule:
