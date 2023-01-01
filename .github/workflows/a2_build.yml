@@ -148,3 +148,28 @@ jobs:
       with:
         name: acme2certifier-${{ env.TAG_NAME }}-1.0.noarch.rpm
         path: ${{ steps.rpm_build.outputs.rpm_dir_path }}noarch/acme2certifier-${{ env.TAG_NAME }}-1.0.noarch.rpm
+
+  build_deb:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Prepare deb packaging environment
+      run: |
+        sudo apt-get -y install build-essential fakeroot dpkg-dev devscripts debhelper
+        rm setup.py
+        cp -R examples/install_scripts/debian ./
+        sudo sed -i "s/__version__/${{ env.TAG_NAME }}/g" debian/changelog
+        cd ../
+        tar cvfz ../acme2certifier_${{ env.TAG_NAME }}.orig.tar.gz ./
+
+    - name: "Build debian package"
+      run: |
+        dpkg-buildpackage -uc -us
+        cp ../acme2certifier_${{ env.TAG_NAME }}-1_all.deb "$(pwd)/acme2certifier_${{ env.TAG_NAME }}-1_all.deb"
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: acme2certifier_${{ env.TAG_NAME }}-1_all.deb
+        path: acme2certifier_${{ env.TAG_NAME }}-1_all.deb
