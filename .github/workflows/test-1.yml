@@ -1,4 +1,4 @@
-name: CI notify
+name: CI Test
 
 # Only trigger, when the build workflow succeeded
 on:
@@ -17,4 +17,4 @@ jobs:
     - run: echo "Run test workflow"
 
     - run: echo ${{ github.ref }}
-    - run: ${{ github.sha }}
+    - run: echo ${{ github.sha }}

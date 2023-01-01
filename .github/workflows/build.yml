@@ -17,6 +17,6 @@ jobs:
         time: 10s
 
     - run: echo ${{ github.ref }}
-    - run: ${{ github.sha }}
+    - run: echo ${{ github.sha }}
 
     - run: echo "Rund build workflow ended"
