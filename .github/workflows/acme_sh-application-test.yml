@@ -39,6 +39,7 @@ jobs:
     - name: "Bring up container"
       working-directory: examples/Docker/
       run: |
+        exit 1
         sudo mkdir -p data
         docker network create acme
         docker-compose up -d
