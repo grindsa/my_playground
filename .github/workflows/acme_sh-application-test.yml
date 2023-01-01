@@ -286,6 +286,7 @@ jobs:
       matrix:
         accountkeylength: [2048, ec-256, ec-521]
         keylength: [2048, 4096, ec-521]
+
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
@@ -306,6 +307,15 @@ jobs:
         docker load -i a2c-nginx-wsgi.tar
         docker images
 
+    - name: "Bring up container"
+      working-directory: examples/Docker/
+      run: |
+        sed -i "s/apache2/nginx/g" .env
+        sudo mkdir -p data
+        docker network create acme
+        docker-compose up -d
+        docker-compose logs
+
     - name: "Setup openssl ca_handler"
       run: |
         sudo cp examples/ca_handler/openssl_ca_handler.py examples/Docker/data/ca_handler.py
@@ -316,15 +326,6 @@ jobs:
         sudo cp .github/acme2certifier_key.pem examples/Docker/data/acme2certifier_key.pem
         cd examples/Docker/
         docker-compose restart
-        docker-compose logs
-
-    - name: "Bring up container"
-      working-directory: examples/Docker/
-      run: |
-        sed -i "s/apache2/nginx/g" .env
-        sudo mkdir -p data
-        docker network create acme
-        docker-compose up -d
         docker-compose logs
 
     - name: "Sleep for 10s"
