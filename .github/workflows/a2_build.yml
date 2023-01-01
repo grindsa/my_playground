@@ -122,3 +122,29 @@ jobs:
       with:
         name: a2c-nginx-django.tar.gz
         path: /tmp/a2c-artificats/a2c-nginx-django.tar.gz
+
+  build_rpm:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: update version number in spec file
+      run: |
+        sudo sed -i "s/__version__/${{ env.TAG_NAME }}/g" examples/install_scripts/rpm/acme2certifier.spec
+        sudo sed -i "s/\/var\/www\/acme2certifier\/volume/\/etc\/nginx/g" examples/nginx/nginx_acme_srv_ssl.conf
+        git config --global user.email "grindelsack@gmail.com"
+        git config --global user.name "rpm update"
+        git add examples/nginx
+        git commit -a -m "rpm update"
+
+    - name: Build RPM package
+      id: rpm_build
+      uses: naveenrajm7/rpmbuild@master
+      with:
+        spec_file: "examples/install_scripts/rpm/acme2certifier.spec"
+
+    - uses: actions/upload-artifact@v3
+      with:
+        name: acme2certifier-${{ env.TAG_NAME }}-1.0.noarch.rpm
+        path: ${{ steps.rpm_build.outputs.rpm_dir_path }}noarch/acme2certifier-${{ env.TAG_NAME }}-1.0.noarch.rpm
