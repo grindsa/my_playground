@@ -80,12 +80,12 @@ jobs:
 
     - name: "Create image"
       run: |
-           cat examples/Docker/nginx/wsgi/Dockerfile | docker build -t nginx/wsgi -t grindsa/acme2certifier:nginx-wsgi -t grindsa/acme2certifier:${{ env.TAG_NAME }}-nginx-wsgi -t ghcr.io/grindsa/acme2certifier:nginx-wsgi -t ghcr.io/grindsa/acme2certifier:${{ env.TAG_NAME }}-nginx-wsgi -f - . --no-cache
+           cat examples/Docker/nginx/wsgi/Dockerfile | docker build -t acme2certifier/wsgi -t grindsa/acme2certifier:nginx-wsgi -t grindsa/acme2certifier:${{ env.TAG_NAME }}-nginx-wsgi -t ghcr.io/grindsa/acme2certifier:nginx-wsgi -t ghcr.io/grindsa/acme2certifier:${{ env.TAG_NAME }}-nginx-wsgi -f - . --no-cache
 
     - name: "Dump image to local filesystem"
       run: |
           mkdir -p /tmp/a2c-artificats
-          docker save acme2certifier/nginx:latest -o /tmp/a2c-artificats/a2c-nginx-wsgi.tar
+          docker save acme2certifier/wsgi:latest -o /tmp/a2c-artificats/a2c-nginx-wsgi.tar
           gzip /tmp/a2c-artificats/a2c-nginx-wsgi.tar
 
     - uses: actions/upload-artifact@v3
