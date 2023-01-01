@@ -12,9 +12,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
-    - run: echo "Run test workflow"
+    - run: echo "Run test workflow for commit ${{ github.sha }}"
 
-    - run: echo ${{ github.sha }}
+    - uses: actions/download-artifact@v3
+      with:
+        name: ac2-wsgi-${{ github.sha }}.tar.gz
+        path: /tmp
+
+    - name: Display structure of downloaded files
+      working-directory: /tmp
+      run: |
+        ls -la
+        gunzip ac2-wsgi-${{ github.sha }}.tar.gz
+
 
