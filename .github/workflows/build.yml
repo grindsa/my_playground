@@ -19,7 +19,7 @@ jobs:
       run: |
           mkdir -p /tmp/a2c-artificats
           docker save grindsa/acme2certifier:apache2-wsgi -o /tmp/a2c-artificats/ac2-wsgi-${{ github.sha }}.tar
-          gzip /tmp/a2c-artificats/ac2-wsgi-${{ github.sha }}.tar.gz
+          gzip /tmp/a2c-artificats/ac2-wsgi-${{ github.sha }}.tar
 
     - uses: actions/upload-artifact@v2
       with:
