@@ -9,13 +9,15 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: echo "Rund build workflow"
+    - run: echo "Rund build workflow for commit ${{ github.sha }}"
 
-    - name: "[ WAIT ] Sleep for 10s"
-      uses: juliangruber/sleep-action@v1
-      with:
-        time: 10s
+    - name: "Create images"
+      run: |
+        cat examples/Docker/apache2/wsgi/Dockerfile | docker build -t grindsa/acme2certifier:apache2-wsgi -f - . --no-cache
 
-    - run: echo ${{ github.sha }}
+    - name: "Dump images to local filesystem"
+      run: |
+          docker save grindsa/acme2certifier:apache2-wsgi -o ac2-wsgi.tar
+
 
     - run: echo "Rund build workflow ended"
