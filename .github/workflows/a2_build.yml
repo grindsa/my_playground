@@ -1,4 +1,4 @@
-name: CI build
+name: a2c build
 
 on:
   push:

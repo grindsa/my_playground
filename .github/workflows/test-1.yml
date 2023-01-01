@@ -1,9 +1,9 @@
-name: CI Test
+name: test build
 
 # Only trigger, when the build workflow succeeded
 on:
   workflow_run:
-    workflows: ["CI build"]
+    workflows: ["a2c build"]
     types:
       - completed
 
@@ -39,8 +39,3 @@ jobs:
         docker network create acme
         docker-compose up -d
         docker-compose logs
-
-    - name: Load Docker images into repository
-      working-directory: /tmp
-      run: |
-        docker images
