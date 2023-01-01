@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - run: echo "Rund build workflow for commit ${{ github.sha }}"
 
@@ -21,7 +21,7 @@ jobs:
           docker save grindsa/acme2certifier:apache2-wsgi -o /tmp/a2c-artificats/ac2-wsgi-${{ github.sha }}.tar
           gzip /tmp/a2c-artificats/ac2-wsgi-${{ github.sha }}.tar
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: ac2-wsgi-${{ github.sha }}.tar.gz
         path: /tmp/a2c-artificats/ac2-wsgi-${{ github.sha }}.tar.gz
