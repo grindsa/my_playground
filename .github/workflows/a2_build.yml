@@ -203,5 +203,10 @@ jobs:
   #      echo "foo"
 
   acme_sh-application-test:
-    needs: [build_apache2_wsgi, build_apache2_django, build_nginx_wsgi, build_nginx_django, build_rpm, build_deb]
+    needs: [build_apache2_wsgi, build_apache2_django, build_nginx_wsgi, build_nginx_django]
     uses: ./.github/workflows/acme_sh-application-test.yml
+
+
+   certbot-application-test:
+    needs: [build_apache2_wsgi, build_apache2_django, build_nginx_wsgi, build_nginx_django]
+    uses: ./.github/workflows/certbot-application-test.yml
