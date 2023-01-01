@@ -16,10 +16,21 @@ jobs:
 
     - run: echo "Run test workflow for commit ${{ github.sha }}"
 
-    - uses: actions/download-artifact@v3
+    - name: Download artifact
+      id: download-artifact
+      uses: dawidd6/action-download-artifact@v2
       with:
+        # Optional, GitHub token, a Personal Access Token with `public_repo` scope if needed
+        # Required, if the artifact is from a different repo
+        # Required, if the repo is private a Personal Access Token with `repo` scope is needed
+        github_token: ${{secrets.GITHUB_TOKEN}}
         name: ac2-wsgi-${{ github.sha }}.tar.gz
         path: /tmp
+
+    #- uses: actions/download-artifact@v3
+    #  with:
+    #    name: ac2-wsgi-${{ github.sha }}.tar.gz
+    #    path: /tmp
 
     - name: Display structure of downloaded files
       working-directory: /tmp
