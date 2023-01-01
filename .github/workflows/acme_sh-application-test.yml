@@ -11,8 +11,14 @@ on:
   workflow_call
 
 jobs:
+
+  acme_sh_group_test:
+    steps:
+    - run: echo group tests
+
   acme_sh_apache2_wsgi:
     name: "acme_sh_apache2_wsgi"
+    needs: [acme_sh_group_test]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -145,6 +151,7 @@ jobs:
 
   acme_sh_apache2_django:
     name: "acme_sh_apache2_django"
+    needs: [acme_sh_group_test]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -281,6 +288,7 @@ jobs:
 
   acme_sh_nginx_wsgi:
     name: "acme_sh_nginx_wsgi"
+    needs: [acme_sh_group_test]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -418,6 +426,7 @@ jobs:
 
   acme_sh_nginx_django:
     name: "acme_sh_nginx_django"
+    needs: [acme_sh_group_test]
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false

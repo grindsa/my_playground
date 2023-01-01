@@ -202,9 +202,9 @@ jobs:
   #    run: |
   #      echo "foo"
 
-  acme_sh-summary-test:
+  acme_sh-application-test:
     needs: [build_apache2_wsgi, build_apache2_django, build_nginx_wsgi, build_nginx_django]
-    uses: ./.github/workflows/acme_sh-summary-test.yml
+    uses: ./.github/workflows/acme_sh-application-test.yml
 
   certbot-application-test:
     needs: [build_apache2_wsgi, build_apache2_django, build_nginx_wsgi, build_nginx_django]
