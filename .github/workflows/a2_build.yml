@@ -13,12 +13,12 @@ jobs:
 
     - name: "Create image"
       run: |
-        cat examples/Docker/apache2/wsgi/Dockerfile | docker build -t acme2certifier/wsgi -f - . --no-cache
+        cat examples/Docker/apache2/wsgi/Dockerfile | docker build -t acme2certifier/wsgi -t grindsa/acme2certifier:apache2-wsgi -f - . --no-cache
 
     - name: "Dump image to local filesystem"
       run: |
           mkdir -p /tmp/a2c-artificats
-          docker save grindsa/acme2certifier:apache2-wsgi -o /tmp/a2c-artificats/a2c-wsgi.tar
+          docker save acme2certifier/wsgi:latest -o /tmp/a2c-artificats/a2c-wsgi.tar
           gzip /tmp/a2c-artificats/a2c-wsgi.tar
 
     - uses: actions/upload-artifact@v3
