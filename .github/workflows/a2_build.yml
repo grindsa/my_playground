@@ -3,7 +3,7 @@ name: CI build
 on: [push]
 
 jobs:
-  build:
+  build_apache2_wsgi:
     runs-on: ubuntu-latest
 
     steps:
@@ -11,11 +11,11 @@ jobs:
 
     - run: echo "Rund build workflow for commit ${{ github.sha }}"
 
-    - name: "Create images"
+    - name: "Create image"
       run: |
         cat examples/Docker/apache2/wsgi/Dockerfile | docker build -t grindsa/acme2certifier:apache2-wsgi -f - . --no-cache
 
-    - name: "Dump images to local filesystem"
+    - name: "Dump image to local filesystem"
       run: |
           mkdir -p /tmp/a2c-artificats
           docker save grindsa/acme2certifier:apache2-wsgi -o /tmp/a2c-artificats/a2c-wsgi.tar

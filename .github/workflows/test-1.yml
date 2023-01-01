@@ -39,3 +39,8 @@ jobs:
         docker network create acme
         docker-compose up -d
         docker-compose logs
+
+    - name: Load Docker images into repository
+      working-directory: /tmp
+      run: |
+        docker images
