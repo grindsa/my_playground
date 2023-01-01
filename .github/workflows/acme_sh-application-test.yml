@@ -22,9 +22,6 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.workflow_run.head_branch }}
-    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -55,11 +52,10 @@ jobs:
 
     - name: "Setup openssl ca_handler"
       run: |
-        sudo cp examples/ca_handler/openssl_ca_handler.py examples/Docker/data/ca_handler.py
         sudo mkdir -p examples/Docker/data/acme_ca/certs
         sudo cp test/ca/sub-ca-key.pem test/ca/sub-ca-crl.pem test/ca/sub-ca-cert.pem test/ca/root-ca-cert.pem examples/Docker/data/acme_ca/
         sudo cp .github/acme2certifier.pem examples/Docker/data/acme2certifier.pem
-        sudo cp .github/openssl_ca_handler.py_acme_srv_default_handler.cfg examples/Docker/data/acme_srv.cfg
+        sudo cp .github/openssl_ca_handler.py_acme_srv_choosen_handler.cfg examples/Docker/data/acme_srv.cfg
         cd examples/Docker/
         docker-compose restart
         docker-compose logs
@@ -158,9 +154,6 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.workflow_run.head_branch }}
-    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -189,11 +182,10 @@ jobs:
 
     - name: "Setup openssl ca_handler and django config"
       run: |
-        sudo cp examples/ca_handler/openssl_ca_handler.py examples/Docker/data/ca_handler.py
         sudo mkdir -p examples/Docker/data/acme_ca/certs
         sudo cp .github/acme2certifier.pem examples/Docker/data/acme2certifier.pem
         sudo cp test/ca/sub-ca-key.pem test/ca/sub-ca-crl.pem test/ca/sub-ca-cert.pem test/ca/root-ca-cert.pem examples/Docker/data/acme_ca/
-        sudo cp .github/openssl_ca_handler.py_acme_srv_default_handler.cfg examples/Docker/data/acme_srv.cfg
+        sudo cp .github/openssl_ca_handler.py_acme_srv_choosen_handler.cfg examples/Docker/data/acme_srv.cfg
         sudo cp .github/django_settings.py examples/Docker/data/settings.py
         cd examples/Docker/
         docker-compose restart
@@ -299,9 +291,6 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.workflow_run.head_branch }}
-    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -330,10 +319,9 @@ jobs:
 
     - name: "Setup openssl ca_handler"
       run: |
-        sudo cp examples/ca_handler/openssl_ca_handler.py examples/Docker/data/ca_handler.py
         sudo mkdir -p examples/Docker/data/acme_ca/certs
         sudo cp test/ca/sub-ca-key.pem test/ca/sub-ca-crl.pem test/ca/sub-ca-cert.pem test/ca/root-ca-cert.pem examples/Docker/data/acme_ca/
-        sudo cp .github/openssl_ca_handler.py_acme_srv_default_handler.cfg examples/Docker/data/acme_srv.cfg
+        sudo cp .github/openssl_ca_handler.py_acme_srv_choosen_handler.cfg examples/Docker/data/acme_srv.cfg
         sudo cp .github/acme2certifier_cert.pem examples/Docker/data/acme2certifier_cert.pem
         sudo cp .github/acme2certifier_key.pem examples/Docker/data/acme2certifier_key.pem
         cd examples/Docker/
@@ -439,9 +427,6 @@ jobs:
     steps:
     - name: "checkout GIT"
       uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.workflow_run.head_branch }}
-    - run: echo "${{ github.event.workflow_run.head_branch }} got checked out"
 
     - name: Download artifact
       id: download-artifact
@@ -471,10 +456,9 @@ jobs:
 
     - name: "Setup openssl ca_handler and django config"
       run: |
-        sudo cp examples/ca_handler/openssl_ca_handler.py examples/Docker/data/ca_handler.py
         sudo mkdir -p examples/Docker/data/acme_ca/certs
         sudo cp test/ca/sub-ca-key.pem test/ca/sub-ca-crl.pem test/ca/sub-ca-cert.pem test/ca/root-ca-cert.pem examples/Docker/data/acme_ca/
-        sudo cp .github/openssl_ca_handler.py_acme_srv_default_handler.cfg examples/Docker/data/acme_srv.cfg
+        sudo cp .github/openssl_ca_handler.py_acme_srv_choosen_handler.cfg examples/Docker/data/acme_srv.cfg
         sudo cp .github/django_settings.py examples/Docker/data/settings.py
         sudo cp .github/acme2certifier_cert.pem examples/Docker/data/acme2certifier_cert.pem
         sudo cp .github/acme2certifier_key.pem examples/Docker/data/acme2certifier_key.pem
