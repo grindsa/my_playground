@@ -20,23 +20,23 @@ jobs:
       id: download-artifact
       uses: dawidd6/action-download-artifact@v2
       with:
-        # Optional, GitHub token, a Personal Access Token with `public_repo` scope if needed
-        # Required, if the artifact is from a different repo
-        # Required, if the repo is private a Personal Access Token with `repo` scope is needed
         workflow: ${{ github.event.workflow_run.workflow_id }}
         github_token: ${{secrets.GITHUB_TOKEN}}
-        name: ac2-wsgi-${{ github.sha }}.tar.gz
+        name: a2c-wsgi.tar.gz
         path: /tmp
 
-    #- uses: actions/download-artifact@v3
-    #  with:
-    #    name: ac2-wsgi-${{ github.sha }}.tar.gz
-    #    path: /tmp
-
-    - name: Display structure of downloaded files
+    - name: Load Docker images into repository
       working-directory: /tmp
       run: |
-        ls -la
-        gunzip ac2-wsgi-${{ github.sha }}.tar.gz
+        gunzip a2c-wsgi.tar.gz
+        docker load a2c-wsgi.tar
+
+    - name: "Bring up container"
+      working-directory: examples/Docker/
+      run: |
+        sudo mkdir -p data
+        docker network create acme
+        docker-compose up -d
+        docker-compose logs
 
 

@@ -18,13 +18,10 @@ jobs:
     - name: "Dump images to local filesystem"
       run: |
           mkdir -p /tmp/a2c-artificats
-          docker save grindsa/acme2certifier:apache2-wsgi -o /tmp/a2c-artificats/ac2-wsgi-${{ github.sha }}.tar
-          gzip /tmp/a2c-artificats/ac2-wsgi-${{ github.sha }}.tar
+          docker save grindsa/acme2certifier:apache2-wsgi -o /tmp/a2c-artificats/a2c-wsgi.tar
+          gzip /tmp/a2c-artificats/a2c-wsgi.tar
 
     - uses: actions/upload-artifact@v3
       with:
-        name: ac2-wsgi-${{ github.sha }}.tar.gz
-        path: /tmp/a2c-artificats/ac2-wsgi-${{ github.sha }}.tar.gz
-
-
-    - run: echo "Rund build workflow ended"
+        name: a2c-wsgi.tar.gz
+        path: /tmp/a2c-artificats/a2c-wsgi.tar.gz
