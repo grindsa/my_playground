@@ -194,20 +194,14 @@ jobs:
         path: acme2certifier_${{ env.TAG_NAME }}-1_all.deb
 
 
-  sub_workflow1:
+  #sub_workflow1:
+  #  needs: [build_apache2_wsgi, build_apache2_django, build_nginx_wsgi, build_nginx_django, build_rpm, build_deb]
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - name: juppwupp 1
+  #    run: |
+  #      echo "foo"
+
+  acme_sh-application-test:
     needs: [build_apache2_wsgi, build_apache2_django, build_nginx_wsgi, build_nginx_django, build_rpm, build_deb]
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: juppwupp 1
-      run: |
-        echo "foo"
-
-  sub_workflow2:
-    needs: [build_apache2_wsgi, build_apache2_django, build_nginx_wsgi, build_nginx_django, build_rpm, build_deb]
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: juppwupp 2
-      run: |
-        echo foo
+    uses: ./.github/workflows/acme_sh-application-test.yml
