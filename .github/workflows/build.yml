@@ -21,4 +21,4 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    uses: ./.github/workflows/deploy.yml@devel
+    uses: grindsa/acme2certifier/blob/devel/.github/workflows/deploy.yml
