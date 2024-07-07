@@ -1,9 +1,9 @@
 name: CI deploy
 
 on:
-  pull_request:
-    branches:
-      - foo
+  workflow_run:
+    workflows: [build]
+    types: [completed]
 
 jobs:
   deploy:
