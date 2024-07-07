@@ -1,4 +1,4 @@
-name: CI deploy
+name: CI deploy # Change the name of the workflow to CI deploy
 
 on:
   push:
