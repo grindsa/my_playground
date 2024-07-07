@@ -12,7 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - run: echo "Build"
+    - run: echo "Build-1"
     - run: echo "Latest tag is ${{ github.run_id }}"
-    - run: echo "Latest tag is ${{ github.event.workflow_run.id }}
-
+    - run: echo "Latest tag is ${{ github.event.workflow_run.id }}"
