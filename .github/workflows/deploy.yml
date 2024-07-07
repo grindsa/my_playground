@@ -1,0 +1,21 @@
+name: CI deploy
+
+on:
+  workflow_run:
+    workflows: ["build"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - run: echo "deploy-1"
+    - run: echo "Latest tag is ${{ github.run_id }}"
+    - run: echo "SHA is ${{ github.sha }}"
+
+
+

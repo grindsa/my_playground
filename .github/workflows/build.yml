@@ -1,0 +1,20 @@
+name: CI build
+
+on:
+  push:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 2 * * 6'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - run: echo "Build-1"
+    - run: echo "Latest tag is ${{ github.run_id }}"
+    - run: echo "SHA ${{ github.sha }}"
+    - run: echo BRANCH=${{ github.head_ref || github.ref_name }} >> $GITHUB_ENV
+    - run: echo "Branch is ${{ github.head_ref || github.ref_name }}"
+
