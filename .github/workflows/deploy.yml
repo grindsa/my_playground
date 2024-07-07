@@ -1,10 +1,9 @@
 name: CI deploy
 
-#on:
-#  push:
-#  schedule:
-#    # * is a special character in YAML so you have to quote this string
-#    - cron:  '0 2 * * 6'
+on:
+  pull_request:
+    branches:
+      - foo
 
 jobs:
   deploy:
