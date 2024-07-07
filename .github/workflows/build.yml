@@ -1,4 +1,4 @@
-name: CI build
+name: CI build # Change the name of the workflow to CI build
 
 on:
   push:
