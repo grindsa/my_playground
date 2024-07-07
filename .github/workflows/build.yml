@@ -20,4 +20,4 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build
-    uses: ./.github/workflows/deploy.yml@${{ github.head_ref || github.ref_name }}
+    uses: grindsa/acme2certifier/.github/workflows/deploy.yml@${{ github.head_ref || github.ref_name }}
