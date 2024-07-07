@@ -15,3 +15,4 @@ jobs:
     - run: echo "Build-1"
     - run: echo "Latest tag is ${{ github.run_id }}"
     - run: echo "SHA ${{ github.sha }}"
+    - run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}"
