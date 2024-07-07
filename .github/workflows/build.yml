@@ -1,0 +1,19 @@
+name: CI build
+
+on:
+  push:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 2 * * 6'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Build
+      run: |
+        echo "build"
+        echo ${{ github.event.workflow_run.id }}
+

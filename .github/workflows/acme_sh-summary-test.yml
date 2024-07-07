@@ -1,8 +1,0 @@
-name: acme_sh_summary-tests
-
-on:
-  workflow_call
-
-jobs:
-  acme_sh-application-test:
-    uses: ./.github/workflows/acme_sh-application-test.yml
