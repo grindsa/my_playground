@@ -1,4 +1,4 @@
-name: deploy
+name: CI deploy
 
 on:
   push:
@@ -16,6 +16,3 @@ jobs:
     - run: echo "deploy-1"
     - run: echo "Latest tag is ${{ github.run_id }}"
     - run: echo "SHA is ${{ github.sha }}"
-
-
-

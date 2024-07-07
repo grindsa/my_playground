@@ -1,4 +1,4 @@
-name: build
+name: CI build
 
 on:
   push:
@@ -15,6 +15,3 @@ jobs:
     - run: echo "Build-1"
     - run: echo "Latest tag is ${{ github.run_id }}"
     - run: echo "SHA ${{ github.sha }}"
-    - run: echo BRANCH=${{ github.head_ref || github.ref_name }} >> $GITHUB_ENV
-    - run: echo "Branch is ${{ github.head_ref || github.ref_name }}"
-
