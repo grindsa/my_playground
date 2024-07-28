@@ -10,7 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: "checkout GIT"
+      uses: actions/checkout@v4
 
     - run: echo "Build-1"
     - run: echo "Latest tag is ${{ github.run_id }}"

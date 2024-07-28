@@ -10,7 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - name: "checkout GIT"
+      uses: actions/checkout@v4
 
     - run: echo "deploy-2"
     - run: echo "run_id is ${{ github.run_id }}"
