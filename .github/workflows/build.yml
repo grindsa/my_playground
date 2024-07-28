@@ -33,6 +33,7 @@ jobs:
         echo "${{ github.ref }}" >> ${{ github.workspace }}/artifact/upload/artifact.${{ github.run_id }}.txt
         echo "artifact build successful"
         cat ${{ github.workspace }}/artifact/upload/artifact.${{ github.run_id }}.txt
+        exit 1
 
     - name: "Upload Artifact"
       uses: actions/upload-artifact@master
