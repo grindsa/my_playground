@@ -14,7 +14,6 @@ jobs:
 
     - run: echo "deploy-1"
     - run: echo "run_id is ${{ github.run_id }}"
-    - run: echo "run.id is ${{ github.event.workflow_run.id }}"
     - run: echo "Remote run_id is ${{ github.event.client_payload.run_id }}"
     - run: echo "Remote SHA is ${{ github.event.client_payload.sha }}"
     - run: echo "Remote Ref is ${{ github.event.client_payload.ref }}"
