@@ -23,6 +23,21 @@ jobs:
     - run: echo "Latest tag is ${{ github.run_id }}"
     - run: echo "SHA ${{ github.sha }}"
 
+
+    - name: "Create artifact"
+      id: create_artifcat
+      run: |
+        mkdir -p ${{ github.workspace }}/artifact/upload
+        touch ${{ github.workspace }}/artifact/upload/artifact.txt
+        echo "Hello world" > ${{ github.workspace }}/artifact/upload/artifact.txt
+        echo "artifact build successful"
+
+    - name: "Upload Artifact"
+      uses: actions/upload-artifact@master
+      with:
+        name: artifact.txt
+        path: ${{ github.workspace }}/artifact/upload/
+
     - name: Trigger next workflow
       if: success()
       uses: peter-evans/repository-dispatch@v3
