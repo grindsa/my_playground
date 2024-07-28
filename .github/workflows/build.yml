@@ -30,6 +30,8 @@ jobs:
         mkdir -p ${{ github.workspace }}/artifact/upload
         touch ${{ github.workspace }}/artifact/upload/artifact.txt
         echo "Hello world" > ${{ github.workspace }}/artifact/upload/artifact.txt
+        echo "${{ github.run_id }}" >> ${{ github.workspace }}/artifact/upload/artifact.txt
+        echo "${{ github.ref }}" >> ${{ github.workspace }}/artifact/upload/artifact.txt
         echo "artifact build successful"
 
     - name: "Upload Artifact"
