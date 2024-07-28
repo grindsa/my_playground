@@ -43,4 +43,4 @@ jobs:
       uses: peter-evans/repository-dispatch@v3
       with:
         event-type: deploy-event
-        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
+        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}, "run_id": "${{ github.event.workflow_run.id }}"}'

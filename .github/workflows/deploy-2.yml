@@ -13,7 +13,9 @@ jobs:
     - uses: actions/checkout@v3
 
     - run: echo "deploy-2"
-    - run: echo "Latest tag is ${{ github.run_id }}"
+    - run: echo "run_id is ${{ github.run_id }}"
+    - run: echo "run.id is ${{ github.event.workflow_run.id }}"
+    - run: echo "Remote run_id is ${{ github.event.client_payload.run_id }}"
     - run: echo "Remote SHA is ${{ github.event.client_payload.sha }}"
     - run: echo "Remote Ref is ${{ github.event.client_payload.ref }}"
     - run: echo "SHA is ${{ github.sha }}"
