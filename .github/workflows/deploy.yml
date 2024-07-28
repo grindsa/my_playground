@@ -41,4 +41,4 @@ jobs:
     if: needs.check_changes.outputs.src == 'true'
     runs-on: ubuntu-latest
     steps:
-        run: echo "do something"
+      - run: echo "do something"
