@@ -27,17 +27,17 @@ jobs:
       id: create_artifcat
       run: |
         mkdir -p ${{ github.workspace }}/artifact/upload
-        touch ${{ github.workspace }}/artifact/upload/artifact.txt
-        echo "Hello world" > ${{ github.workspace }}/artifact/upload/artifact.txt
-        echo "${{ github.run_id }}" >> ${{ github.workspace }}/artifact/upload/artifact.txt
-        echo "${{ github.ref }}" >> ${{ github.workspace }}/artifact/upload/artifact.txt
+        touch ${{ github.workspace }}/artifact/upload/artifact.${{ github.run_id }}.txt
+        echo "Hello world" > ${{ github.workspace }}/artifact/upload/artifact.${{ github.run_id }}.txt
+        echo "${{ github.run_id }}" >> ${{ github.workspace }}/artifact/upload/artifact.${{ github.run_id }}.txt
+        echo "${{ github.ref }}" >> ${{ github.workspace }}/artifact/upload/artifact.${{ github.run_id }}.txt
         echo "artifact build successful"
-        cat ${{ github.workspace }}/artifact/upload/artifact.txt
+        cat ${{ github.workspace }}/artifact/upload/artifact.${{ github.run_id }}.txt
 
     - name: "Upload Artifact"
       uses: actions/upload-artifact@master
       with:
-        name: artifact.txt
+        name: artifact.${{ github.run_id }}.txt
         path: ${{ github.workspace }}/artifact/upload/
 
     - name: Trigger next workflow

@@ -24,7 +24,7 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v4
       with:
-        name: artifact.txt
+        name: artifact.${{ github.event.client_payload.run_id }}.txt
         run-id: ${{ github.event.client_payload.run_id }} # ${{ github.event.workflow_run.id }}
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path: data/
@@ -32,4 +32,4 @@ jobs:
     - name: show file
       run: |
         ls -la data/
-        cat data/artifact.txt
+        cat data/artifact.${{ github.event.client_payload.run_id }}.txt
