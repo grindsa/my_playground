@@ -28,5 +28,5 @@ jobs:
       uses: peter-evans/repository-dispatch@v1
       with:
         token: ${{ secrets.DISPATCH_TOKEN }}
-        event-type: ci-deploy
+        event-type: deploy
         client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
