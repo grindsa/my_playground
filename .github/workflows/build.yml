@@ -15,10 +15,10 @@ jobs:
     - run: echo "Build-1"
     - run: echo "Latest tag is ${{ github.run_id }}"
 
-    - name: "Sleep for 50s"
+    - name: "Sleep for 5s"
       uses: juliangruber/sleep-action@v2.0.3
       with:
-        time: 50s
+        time: 5s
 
     - run: echo "Latest tag is ${{ github.run_id }}"
     - run: echo "SHA ${{ github.sha }}"
