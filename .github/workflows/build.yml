@@ -23,7 +23,6 @@ jobs:
     - run: echo "Latest tag is ${{ github.run_id }}"
     - run: echo "SHA ${{ github.sha }}"
 
-
     - name: "Create artifact"
       id: create_artifcat
       run: |
@@ -33,6 +32,7 @@ jobs:
         echo "${{ github.run_id }}" >> ${{ github.workspace }}/artifact/upload/artifact.txt
         echo "${{ github.ref }}" >> ${{ github.workspace }}/artifact/upload/artifact.txt
         echo "artifact build successful"
+        cat ${{ github.workspace }}/artifact/upload/artifact.txt
 
     - name: "Upload Artifact"
       uses: actions/upload-artifact@master
