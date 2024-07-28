@@ -1,4 +1,4 @@
-name: deploy # Change the name of the workflow to CI deploy
+name: "deploy-1" # Change the name of the workflow to CI deploy
 
 on:
   repository_dispatch:
