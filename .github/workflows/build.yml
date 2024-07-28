@@ -1,24 +1,26 @@
-name: CI build
+# .github/workflows/first_cd.yml
+name: First Continuous Deployment
 
 on:
   push:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 2 * * 6'
-
+    branches:
+      - develop
 jobs:
-  build:
+  check_changes:
     runs-on: ubuntu-latest
+    outputs:
+      src:
     steps:
     - uses: actions/checkout@v3
-
-    - run: echo "Build-1"
-    - run: echo "Latest tag is ${{ github.run_id }}"
-
-    - name: "Sleep for 20s"
-      uses: juliangruber/sleep-action@v2.0.3
+    - uses: dorny/paths-filter@v3
+      id: changes
       with:
-        time: 20s
-
-    - run: echo "Latest tag is ${{ github.run_id }}"
-    - run: echo "SHA ${{ github.sha }}"
+        filters: |
+          src:
+            - 'firstpath/**'
+  do_something:
+    needs: check_changes
+    if: needs.check_changes.outputs.src == 'true'
+    runs-on: ubuntu-latest
+    steps:
+        run: echo "do something"
