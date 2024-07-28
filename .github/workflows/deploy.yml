@@ -2,7 +2,7 @@ name: CI deploy # Change the name of the workflow to CI deploy
 
 on:
   workflow_run:
-    workflows: [ci_build]
+    workflows: [CI build]
     types:
       - completed
 
