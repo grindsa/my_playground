@@ -19,7 +19,6 @@ jobs:
             - 'firstpath/**'
   do_something:
     needs: check_changes
-    if: needs.check_changes.outputs.src == 'true'
     runs-on: ubuntu-latest
     steps:
       - run: echo "do something"
