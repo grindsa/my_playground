@@ -7,6 +7,13 @@ on:
       - completed
 
 jobs:
+
+  success:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - run: echo 'The First workflow completed successfully.'
+
   deploy:
     runs-on: ubuntu-latest
 
