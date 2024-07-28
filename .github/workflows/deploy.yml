@@ -1,10 +1,10 @@
 name: CI deploy # Change the name of the workflow to CI deploy
 
 on:
-  push:
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    - cron:  '0 2 * * 6'
+  workflow_run:
+    workflows: [ci_build]
+    types:
+      - completed
 
 jobs:
   deploy:
