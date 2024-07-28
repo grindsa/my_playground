@@ -18,3 +18,18 @@ jobs:
     - run: echo "Remote SHA is ${{ github.event.client_payload.sha }}"
     - run: echo "Remote Ref is ${{ github.event.client_payload.ref }}"
     - run: echo "SHA is ${{ github.sha }}"
+
+    - run: mkdir -p data/
+
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: artifact.txt
+        run-id: ${{ github.event.client_payload.run_id }} # ${{ github.event.workflow_run.id }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        path: data/
+
+    - name: show file
+      run: |
+        ls -la data/
+        cat data/artifact.txt

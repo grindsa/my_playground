@@ -29,6 +29,7 @@ jobs:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         path: data/
 
-    - name: Download UEFI firmware
+    - name: show file
       run: |
         ls -la data/
+        cat data/artifact.txt
