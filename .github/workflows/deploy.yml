@@ -2,7 +2,7 @@ name: deploy # Change the name of the workflow to CI deploy
 
 on:
   repository_dispatch:
-    types: [deploy]
+    types: [deploy-event]
 
 jobs:
 

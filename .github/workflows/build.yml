@@ -25,8 +25,7 @@ jobs:
 
     - name: Trigger next workflow
       if: success()
-      uses: peter-evans/repository-dispatch@v1
+      uses: peter-evans/repository-dispatch@v3
       with:
-        token: ${{ secrets.DISPATCH_TOKEN }}
-        event-type: deploy
+        event-type: deploy-event
         client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
