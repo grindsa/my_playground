@@ -1,12 +1,11 @@
-name: CI deploy
+name: deploy # Change the name of the workflow to CI deploy
 
 on:
-  workflow_run:
-    workflows: ["build"]
-    types:
-      - completed
+  repository_dispatch:
+    types: [deploy-event]
 
 jobs:
+
   deploy:
     runs-on: ubuntu-latest
 
@@ -15,7 +14,5 @@ jobs:
 
     - run: echo "deploy-1"
     - run: echo "Latest tag is ${{ github.run_id }}"
+    - run: echo "SHA is ${{ github.event.client_payload.sha"
     - run: echo "SHA is ${{ github.sha }}"
-
-
-

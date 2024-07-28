@@ -1,4 +1,4 @@
-name: CI build
+name: ci-build
 
 on:
   push:
@@ -14,7 +14,18 @@ jobs:
 
     - run: echo "Build-1"
     - run: echo "Latest tag is ${{ github.run_id }}"
-    - run: echo "SHA ${{ github.sha }}"
-    - run: echo BRANCH=${{ github.head_ref || github.ref_name }} >> $GITHUB_ENV
-    - run: echo "Branch is ${{ github.head_ref || github.ref_name }}"
 
+    - name: "Sleep for 10s"
+      uses: juliangruber/sleep-action@v2.0.3
+      with:
+        time: 10s
+
+    - run: echo "Latest tag is ${{ github.run_id }}"
+    - run: echo "SHA ${{ github.sha }}"
+
+    - name: Trigger next workflow
+      if: success()
+      uses: peter-evans/repository-dispatch@v3
+      with:
+        event-type: deploy-event
+        client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}"}'
