@@ -1,7 +1,6 @@
 name: tls-alpn-01 challenge tests
 
 on:
-  if: github.repository == 'grindsa/acme2certifier'
   push:
   pull_request:
     branches: [ devel ]
