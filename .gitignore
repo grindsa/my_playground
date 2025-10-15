@@ -95,6 +95,9 @@ ENV/
 # mkdocs documentation
 /site
 
+# apple
+.DS_Store
+
 # mypy
 .mypy_cache/
 
