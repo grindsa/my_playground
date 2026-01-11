@@ -1,5 +1,5 @@
 
-name: build
+name: master-only-wf
 on:
   push:
     branches: [ master ]       # build on any branch
