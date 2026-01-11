@@ -16,8 +16,6 @@ jobs:
   # ---------------------------------------------------------
   build-containers:
     runs-on: ubuntu-latest
-    # Prevent workflows from running in forks
-    if: github.repository == 'grindsa/acme2certifier'
     strategy:
       fail-fast: false
       matrix:
@@ -73,8 +71,6 @@ jobs:
       deployments: write
 
     steps:
-
-      - uses: actions/checkout@v4
 
       - name: Dispatch repository event
         uses: peter-evans/repository-dispatch@v4
