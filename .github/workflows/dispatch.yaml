@@ -26,7 +26,7 @@ jobs:
     needs: guard
     steps:
       - name: dispatch-broker
-        uses: grindsa/dispatch-broker-action@devel
+        uses: grindsa/dispatch-broker-action@main
         with:
           token: ${{ secrets.GH_WF_TOKEN }}
           repository: ${{ github.repository }}
