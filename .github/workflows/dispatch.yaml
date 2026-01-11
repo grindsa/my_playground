@@ -20,6 +20,7 @@ jobs:
           echo "From branch:         ${{ github.event.client_payload.branch }}"
           echo "Producer run_id:     ${{ github.event.client_payload.run_id }}"
           echo "Called by workflow:  ${{ github.event.client_payload.called_by_workflow }}"
+          echo "foo"
 
 
       - name: Dispatch-broker
