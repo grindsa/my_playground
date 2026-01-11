@@ -31,21 +31,21 @@ jobs:
     runs-on: ubuntu-latest
     if: >
       ${{
-        github.event.client_payload.sha != '' &&
-        github.event.client_payload.run_id != '' &&
-        github.event.client_payload.branch != ''
+        ${{ inputs.sha }} != '' &&
+        ${{ inputs.run_id }} != '' &&
+        ${{ inputs.branch }} != ''
       }}
     steps:
       - run: |
-          echo "Triggered by SHA:    ${{ github.event.client_payload.sha }}"
-          echo "From branch:         ${{ github.event.client_payload.branch }}"
-          echo "Producer run_id:     ${{ github.event.client_payload.run_id }}"
+          echo "Triggered by SHA:    ${{ inputs.sha }}"
+          echo "From branch:         ${{ inputs.branch }}"
+          echo "Producer run_id:     ${{ inputs.run_id }}"
 
   # ---------------------------------------------------------
   # Job A: Test container images (matrix from payload)
   # ---------------------------------------------------------
   test-containers:
-    # needs: guard
+    needs: guard
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
