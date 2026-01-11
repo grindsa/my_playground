@@ -28,7 +28,7 @@ jobs:
           token: ${{ secrets.GH_WF_TOKEN }}
           repository: ${{ github.repository }}
           ref: ${{ github.event.client_payload.branch }}
-          client-payload: ${{ toJson(github.event.client_payload) }}
+          client_payload: ${{ toJson(github.event.client_payload) }}
 
       #- run: |
       #    gh api -H "Accept: application/vnd.github+json" "/repos/${REPO}/contents/.github/workflows?ref=${BRANCH}" --jq '.[] | select(.type=="file" and (.name|test("\\.ya?ml$"))) | .name | sub("\\.ya?ml$";"")'
