@@ -55,15 +55,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.client_payload.full_ref || github.event.client_payload.branch }}
+          ref: ${{ inputs.full_ref || inputs.branch }}
 
       - name: "do some checks"
         run: |
           echo "test container for websrv=${{ matrix.websrv }} dbhandler=${{ matrix.dbhandler }}"
-          echo "producer runid: ${{ github.event.client_payload.run_id }}"
-          echo "payload ref_name: ${{ github.event.client_payload.branch }}"
+          echo "producer runid: ${{ inputs.run_id }}"
+          echo "payload ref_name: ${{ inputs.branch }}"
           echo "ref_name: ${{ github.ref_name }}"
-          echo "sha: ${{ github.event.client_payload.sha }}"
+          echo "sha: ${{ inputs.sha }}"
         shell: bash
 
 
