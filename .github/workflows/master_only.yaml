@@ -15,6 +15,7 @@ jobs:
   # Build four container images (matrix) and push to GHCR
   # ---------------------------------------------------------
   maste-only-build-containers:
+    if: github.ref_name == 'master'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
