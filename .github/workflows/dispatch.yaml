@@ -22,9 +22,17 @@ jobs:
           echo "Called by workflow:  ${{ github.event.client_payload.called_by_workflow }}"
 
 
-      - run: |
-          gh api -H "Accept: application/vnd.github+json" "/repos/${REPO}/contents/.github/workflows?ref=${BRANCH}" --jq '.[] | select(.type=="file" and (.name|test("\\.ya?ml$"))) | .name | sub("\\.ya?ml$";"")'
-        env:
-          GH_TOKEN: ${{ secrets.GH_WF_TOKEN }}
-          REPO: ${{ github.repository }}
-          BRANCH: ${{ github.event.client_payload.branch }}
+      - name: Dispatch-broker
+        uses: grindsa/dispatch-broker-action
+        with:
+          github-token: ${{ secrets.GH_WF_TOKEN }}
+          repository: ${{ github.repository }}
+          ref: ${{ github.event.client_payload.branch }}
+          client-payload: ${{ toJson(github.event.client_payload) }}
+
+      #- run: |
+      #    gh api -H "Accept: application/vnd.github+json" "/repos/${REPO}/contents/.github/workflows?ref=${BRANCH}" --jq '.[] | select(.type=="file" and (.name|test("\\.ya?ml$"))) | .name | sub("\\.ya?ml$";"")'
+      #  env:
+      #    GH_TOKEN: ${{ secrets.GH_WF_TOKEN }}
+      #    REPO: ${{ github.repository }}
+      #    BRANCH: ${{ github.event.client_payload.branch }}
