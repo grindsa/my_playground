@@ -25,5 +25,6 @@ jobs:
       - run: |
           gh api -H "Accept: application/vnd.github+json" "/repos/${REPO}/contents/.github/workflows?ref=${BRANCH}" --jq '.[] | select(.type=="file" and (.name|test("\\.ya?ml$"))) | .name | sub("\\.ya?ml$";"")'
         env:
-          ${REPO}: ${{ github.repository }}
-          ${BRANCH}: ${{ github.event.client_payload.branch }}
+          GH_TOKEN: ${{ secrets.GH_WF_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ github.event.client_payload.branch }}
