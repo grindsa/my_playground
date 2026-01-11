@@ -25,7 +25,7 @@ jobs:
       - name: Dispatch-broker
         uses: grindsa/dispatch-broker-action@devel
         with:
-          github-token: ${{ secrets.GH_WF_TOKEN }}
+          token: ${{ secrets.GH_WF_TOKEN }}
           repository: ${{ github.repository }}
           ref: ${{ github.event.client_payload.branch }}
           client-payload: ${{ toJson(github.event.client_payload) }}
