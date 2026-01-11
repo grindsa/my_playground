@@ -1,15 +1,8 @@
 
-name: test-dispatch
+name: dispatch-broker
 on:
-  # repository_dispatch:
-  #  types: [ artifacts_ready ]
-
-  workflow_dispatch:
-    inputs:
-      trigger-guard:
-        description: 'A dummy input to trigger the workflow'
-        required: false
-        default: 'true'
+  repository_dispatch:
+    types: [ artifacts_ready ]
 
 jobs:
   # (Optional) quick guard to validate incoming payload
@@ -26,30 +19,4 @@ jobs:
           echo "Triggered by SHA:    ${{ github.event.client_payload.sha }}"
           echo "From branch:         ${{ github.event.client_payload.branch }}"
           echo "Producer run_id:     ${{ github.event.client_payload.run_id }}"
-
-  # ---------------------------------------------------------
-  # Job A: Test container images (matrix from payload)
-  # ---------------------------------------------------------
-  test-containers:
-    # needs: guard
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        websrv: ['apache2', 'nginx']
-        dbhandler: ['wsgi', 'django']
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.client_payload.full_ref || github.event.client_payload.branch }}
-
-      - name: "do some checks"
-        run: |
-          echo "test container for websrv=${{ matrix.websrv }} dbhandler=${{ matrix.dbhandler }}"
-          echo "producer runid: ${{ github.event.client_payload.run_id }}"
-          echo "payload ref_name: ${{ github.event.client_payload.branch }}"
-          echo "ref_name: ${{ github.ref_name }}"
-          echo "sha: ${{ github.event.client_payload.sha }}"
-        shell: bash
-
 
