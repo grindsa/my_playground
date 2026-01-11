@@ -1,5 +1,5 @@
 
-name: build
+name: builder-workflow
 on:
   push:
     branches: [ "**" ]       # build on any branch
