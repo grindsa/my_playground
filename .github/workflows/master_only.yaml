@@ -1,0 +1,40 @@
+
+name: master-only-wf
+on:
+  push:
+    branches: [ master ]       # build on any branch
+  workflow_dispatch:
+    branches: [ master ]
+
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  # ---------------------------------------------------------
+  # Build four container images (matrix) and push to GHCR
+  # ---------------------------------------------------------
+  maste-only-build-containers:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        websrv: ['apache2', 'nginx']
+        dbhandler: ['wsgi', 'django']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Build container"
+        run: |
+          echo "##### MASTER ONLY #######"
+          echo "build container for websrv=${{ matrix.websrv }} dbhandler=${{ matrix.dbhandler }}"
+          echo "runid: ${{ github.run_id }}"
+          echo "ref_name: ${{ github.ref_name }}"
+          echo "sha: ${{ github.sha }}"
+
+        shell: bash
+
+
+
