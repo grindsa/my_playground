@@ -36,6 +36,31 @@ jobs:
 
         shell: bash
 
+  build-rpm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Build RPM package"
+        run: |
+          echo "build rpm package"
+          echo "runid: ${{ github.run_id }}"
+          echo "ref_name: ${{ github.ref_name }}"
+          echo "sha: ${{ github.sha }}"
+        shell: bash
+
+  build-deb:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Build DEB package"
+        run: |
+          echo "build deb package"
+          echo "runid: ${{ github.run_id }}"
+          echo "ref_name: ${{ github.ref_name }}"
+          echo "sha: ${{ github.sha }}"
+        shell: bash
+
   # ---------------------------------------------------------
   # Dispatch tests with full payload (branch/ref-safe)
   # ---------------------------------------------------------
