@@ -3,10 +3,27 @@ name: normal-workflow
 on:
   workflow_dispatch:
     inputs:
-      trigger-guard:
-        description: 'A dummy input to trigger the workflow'
+      branch:
+        description: 'Branch to run the workflow on'
+        required: true
+        default: 'main'
+      run_id:
+        description: 'Run ID of the producing workflow'
+        required: true
+        default: '0'
+      sha:
+        description: 'SHA of the commit to run the workflow on'
+        required: true
+        default: ''
+      called_by_workflow:
+        description: 'Name of the producing workflow'
+        required: true
+        default: 'manual-trigger'
+      full_ref:
+        description: 'Full git ref of the commit to run the workflow on'
         required: false
-        default: 'true'
+        default: ''
+
 
 jobs:
   # (Optional) quick guard to validate incoming payload
