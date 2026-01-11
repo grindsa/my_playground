@@ -15,7 +15,7 @@ jobs:
   # Build four container images (matrix) and push to GHCR
   # ---------------------------------------------------------
   maste-only-build-containers:
-    if: github.ref_name == 'master'
+    if: (github.repository == 'grindsa/my_playground') && (github.ref_name == 'master' || github.ref_name == 'devel')
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
