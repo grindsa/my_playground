@@ -31,9 +31,9 @@ jobs:
     runs-on: ubuntu-latest
     if: >
       ${{
-        ${{ inputs.sha }} != '' &&
-        ${{ inputs.run_id }} != '' &&
-        ${{ inputs.branch }} != ''
+        inputs.sha != '' &&
+        inputs.run_id != '' &&
+        inputs.branch != ''
       }}
     steps:
       - run: |
