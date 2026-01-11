@@ -1,0 +1,68 @@
+
+name: build
+on:
+  push:
+    branches: [ "**" ]       # build on any branch
+  workflow_dispatch: {}
+
+
+permissions:
+  pull-requests: write
+  contents: write
+
+jobs:
+  # ---------------------------------------------------------
+  # Build four container images (matrix) and push to GHCR
+  # ---------------------------------------------------------
+  build-containers:
+    runs-on: ubuntu-latest
+    # Prevent workflows from running in forks
+    if: github.repository == 'grindsa/acme2certifier'
+    strategy:
+      fail-fast: false
+      matrix:
+        websrv: ['apache2', 'nginx']
+        dbhandler: ['wsgi', 'django']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: "Build container"
+        run: |
+          echo "build container for websrv=${{ matrix.websrv }} dbhandler=${{ matrix.dbhandler }}"
+          echo "runid: ${{ github.run_id }}"
+          echo "ref_name: ${{ github.ref_name }}"
+          echo "sha: ${{ github.sha }}"
+
+        shell: bash
+
+  # ---------------------------------------------------------
+  # Dispatch tests with full payload (branch/ref-safe)
+  # ---------------------------------------------------------
+  dispatch-tests:
+    runs-on: ubuntu-latest
+    needs: [ build-containers, build-rpm, build-deb ]
+    permissions:
+      contents: read
+      actions: read
+      deployments: write
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Dispatch repository event
+        uses: peter-evans/repository-dispatch@v4
+        with:
+          token: ${{ secrets.GH_WF_TOKEN }}
+          event-type: artifacts_ready
+          client-payload: >-
+            {
+              "sha":        "${{ github.sha }}",
+              "branch":     "${{ github.ref_name }}",
+              "full_ref":   "${{ github.ref }}",
+              "run_id":     "${{ github.run_id }}",
+              "rpm_artifacts": ["acme2certifier-${{ github.run_id }}.noarch.rpm"],
+              "deb_artifacts": ["acme2certifier_${{ github.run_id }}_all.deb"],
+              "images": []
+            }
